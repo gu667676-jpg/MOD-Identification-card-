@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البطاقة التعريفية | محمد أشرف</title>
+    <style>
+        :root {
+            --primary-color: #ff0000; /* الأحمر للأزرار والحدود المهمة */
+            --bg-color: #000000; /* tissue الخلفية السوداء */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff; /* الكتابة البيضاء العادية */
+        }
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: var(--bg-color); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            color: var(--text-color); 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow-x: hidden; 
+            position: relative;
+        }
+
+        /* تأثير الفقاعات الحمراء في الخلفية السوداء */
+        .bubbles { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 1; 
+            pointer-events: none; 
+            overflow: hidden; 
+        }
+        
+        .bubble { 
+            position: absolute; 
+            bottom: -100px; 
+            background: rgba(255, 0, 0, 0.15); 
+            border: 1px solid rgba(255, 0, 0, 0.3); 
+            border-radius: 50%; 
+            animation: floatUp 10s infinite linear; 
+        }
+        
+        @keyframes floatUp { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; } 
+            10% { opacity: 1; } 
+            90% { opacity: 1; } 
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; } 
+        }
+
+        /* شريط التمرير العلوي باللون الأحمر والأبيض */
+        .empire-ticker { 
+            background: rgba(255, 0, 0, 0.1); 
+            border-top: 1px solid var(--primary-color); 
+            border-bottom: 1px solid var(--primary-color); 
+            padding: 8px 0; 
+            margin-bottom: 20px; 
+            overflow: hidden; 
+            width: 100%; 
+            display: flex; 
+        }
+        
+        .ticker-wrap { display: flex; width: 100%; }
+        
+        .ticker-text { 
+            white-space: nowrap; 
+            padding-right: 50px; 
+            animation: marquee 12s linear infinite; 
+            color: var(--text-color); 
+            font-weight: bold; 
+            font-size: 13px; 
+        }
+        
+        @keyframes marquee { 
+            0% { transform: translate3d(0, 0, 0); } 
+            100% { transform: translate3d(-100%, 0, 0); } 
+        }
+
+        /* الكارت الرئيسي */
+        .profile-container { 
+            position: relative;
+            z-index: 10;
+            width: 90%; 
+            max-width: 450px; 
+            background: var(--glass-bg); 
+            border: 1px solid var(--glass-border); 
+            border-radius: 24px; 
+            padding: 25px 20px; 
+            backdrop-filter: blur(20px); 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); 
+            text-align: center; 
+        }
+
+        /* إطار الصورة الشخصية باللون الأحمر المضيء */
+        .avatar-wrapper { 
+            position: relative; 
+            width: 130px; 
+            height: 130px; 
+            margin: 0 auto 15px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: 2px solid var(--primary-color); 
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+        
+        .avatar { width: 100%; height: 100%; object-fit: cover; }
+
+        .name { font-size: 24px; font-weight: bold; color: #fff; margin: 5px 0 0; }
+        .nickname { font-size: 16px; color: var(--primary-color); margin-bottom: 20px; font-weight: 600; }
+        
+        .section-title { font-size: 14px; color: #888; text-align: right; margin: 20px 10px 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        
+        .info-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); border-radius: 14px; padding: 12px; text-align: right; }
+        .info-card label { display: block; font-size: 11px; color: #777; margin-bottom: 4px; }
+        .info-card span { font-size: 14px; font-weight: bold; color: #fff; }
+        
+        /* زر الإرسال الأحمر بالكامل والكتابة عليه بيضاء */
+        .telegram-btn { 
+            display: block; 
+            background: var(--primary-color); 
+            color: #ffffff; 
+            text-decoration: none; 
+            padding: 14px; 
+            border-radius: 15px; 
+            font-weight: bold; 
+            margin-top: 25px; 
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+        
+        .telegram-btn:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5); 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bubbles" id="bubblesContainer"></div>
+
+    <div class="profile-container">
+        
+        <div class="empire-ticker">
+            <div class="ticker-wrap">
+                <div class="ticker-text">👑 البطاقة الشخصية لمحمد اشرف 👑 &nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="ticker-text">👑 البطاقة الشخصية لمحمد اشرف 👑 &nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+        </div>
+        
+        <div class="avatar-wrapper">
+            <!-- قراءة الصورة المحلية المعتمدة -->
+            <img src="1000522173_2.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Mohamed+Ashraf&background=ff0000&color=fff&size=256'" class="avatar">
+        </div>
+
+        <div class="name">محمد أشرف</div>
+        <!-- اليوزر فقط تحت الاسم مباشرة -->
+        <div class="nickname">@M0D_O</div>
+
+        <div class="section-title">البيانات</div>
+        <div class="info-grid">
+            <div class="info-card" style="grid-column: span 2; border-color: var(--primary-color);">
+                <label>المنصب</label>
+                <span style="color: var(--primary-color);">☕ مالك وحاكم إمبراطورية القهوة العظيمة</span>
+            </div>
+            <!-- النمط تم عزله في فقاعة منفصلة هنا -->
+            <div class="info-card"><label>النمط</label><span>🎯 ESFP-A</span></div>
+            <div class="info-card"><label>اللقب</label><span>✨ MOD</span></div>
+            <div class="info-card"><label>العمر</label><span>🎂 21 سنة</span></div>
+            <div class="info-card"><label>البلد</label><span>🇪🇬 مصر</span></div>
+            <div class="info-card"><label>الهواية</label><span>⚽ كرة القدم</span></div>
+            <div class="info-card"><label>الطول</label><span>📏 175 cm</span></div>
+            <div class="info-card" style="grid-column: span 2;"><label>الوزن</label><span>⚖️ 64 kg</span></div>
+        </div>
+
+        <div class="section-title">الاهتمامات والمفضلات</div>
+        <div class="info-grid">
+            <div class="info-card"><label>الأنمي المفضل</label><span>🔍 المحقق كونان</span></div>
+            <div class="info-card"><label>الشخصية المفضلة</label><span>🔥 سون غوكو</span></div>
+            <div class="info-card"><label>الألوان المفضلة</label><span>⚫🔴 الأسود والأحمر</span></div>
+            <div class="info-card"><label>الأكلة المفضلة</label><span>🍽️ أي شيء مش غريب</span></div>
+            <div class="info-card" style="grid-column: span 2;"><label>القصة المفضلة</label><span>⚔️ هجوم العمالقة</span></div>
+        </div>
+
+        <a href="https://t.me/M0D_O" target="_blank" class="telegram-btn">
+            ارسل رسالة لعمك محمد ⚡
+        </a>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('bubblesContainer');
+        const bubbleCount = 15;
+
+        for (let i = 0; i < bubbleCount; i++) {
+            createBubble();
+        }
+
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = Math.random() * 50 + 15 + 'px';
+            bubble.style.width = size;
+            bubble.style.height = size;
+            bubble.style.left = Math.random() * 100 + '%';
+            bubble.style.animationDuration = Math.random() * 6 + 6 + 's';
+            bubble.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(bubble);
+
+            bubble.addEventListener('animationiteration', () => {
+                bubble.style.left = Math.random() * 100 + '%';
+            });
+        }
+    </script>
+</body>
+</html>

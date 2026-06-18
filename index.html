@@ -6,11 +6,11 @@
     <title>البطاقة التعريفية | محمد أشرف</title>
     <style>
         :root {
-            --primary-color: #0088ff; /* اللون الأزرق المضيء الجديد */
-            --bg-color: #000000; /* الخلفية السوداء الاحتياطية */
-            --glass-bg: rgba(0, 0, 0, 0.6); /* جعل خلفية الكارت أغمق لتناسب الفيديو */
-            --glass-border: rgba(0, 136, 255, 0.2);
-            --text-color: #ffffff; /* الكتابة البيضاء العادية */
+            --primary-color: #a855f7; /* اللون البنفسجي المضيء الجديد */
+            --bg-color: #000000; 
+            --glass-bg: rgba(0, 0, 0, 0.5); /* تقليل التعتيم لرؤية أفضل */
+            --glass-border: rgba(168, 85, 247, 0.3);
+            --text-color: #ffffff; 
         }
 
         body { 
@@ -27,7 +27,7 @@
             position: relative;
         }
 
-        /* خلفية الفيديو المتحركة ملء الشاشة */
+        /* خلفية الفيديو المتحركة ملء الشاشة بجودة واضحة */
         .video-background {
             position: absolute;
             top: 0;
@@ -39,21 +39,21 @@
             pointer-events: none;
         }
 
-        /* طبقة تعتيم فوق الفيديو لضمان وضوح الكلام */
+        /* طبقة تعتيم خفيفة جداً فقط لحماية وضوح نصوص الكارت دون إخفاء الفيديو */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(0, 0, 0, 0.4); /* تم تقليل التعتيم لزيادة الوضوح */
             z-index: 2;
             pointer-events: none;
         }
 
-        /* شريط التمرير العلوي باللون الأزرق */
+        /* شريط التمرير العلوي باللون البنفسجي */
         .empire-ticker { 
-            background: rgba(0, 136, 255, 0.1); 
+            background: rgba(168, 85, 247, 0.1); 
             border-top: 1px solid var(--primary-color); 
             border-bottom: 1px solid var(--primary-color); 
             padding: 8px 0; 
@@ -79,7 +79,7 @@
             100% { transform: translate3d(-100%, 0, 0); } 
         }
 
-        /* الكارت الرئيسي */
+        /* الكارت الرئيسي بدون تأثير الضبابية (Blur) المزعج */
         .profile-container { 
             position: relative;
             z-index: 10;
@@ -89,12 +89,12 @@
             border: 1px solid var(--glass-border); 
             border-radius: 24px; 
             padding: 25px 20px; 
-            backdrop-filter: blur(12px); 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9); 
+            /* تم حذف backdrop-filter المسبب للضبابية تماماً هنا */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); 
             text-align: center; 
         }
 
-        /* إطار الصورة الشخصية باللون الأزرق المضيء */
+        /* إطار الصورة الشخصية باللون البنفسجي المضيء */
         .avatar-wrapper { 
             position: relative; 
             width: 130px; 
@@ -106,7 +106,7 @@
             align-items: center; 
             justify-content: center; 
             border: 2px solid var(--primary-color); 
-            box-shadow: 0 0 15px rgba(0, 136, 255, 0.5);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
         }
         
         .avatar { width: 100%; height: 100%; object-fit: cover; }
@@ -114,14 +114,14 @@
         .name { font-size: 24px; font-weight: bold; color: #fff; margin: 5px 0 0; }
         .nickname { font-size: 16px; color: var(--primary-color); margin-bottom: 20px; font-weight: 600; }
         
-        .section-title { font-size: 14px; color: #666; text-align: right; margin: 20px 10px 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
+        .section-title { font-size: 14px; color: #555; text-align: right; margin: 20px 10px 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
         .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         
-        .info-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 14px; padding: 12px; text-align: right; }
+        .info-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 14px; padding: 12px; text-align: right; }
         .info-card label { display: block; font-size: 11px; color: #777; margin-bottom: 4px; }
         .info-card span { font-size: 14px; font-weight: bold; color: #fff; }
         
-        /* زر الإرسال الأزرق بالكامل والكتابة عليه بيضاء */
+        /* زر الإرسال البنفسجي بالكامل والكتابة عليه بيضاء */
         .telegram-btn { 
             display: block; 
             background: var(--primary-color); 
@@ -131,24 +131,24 @@
             border-radius: 15px; 
             font-weight: bold; 
             margin-top: 25px; 
-            box-shadow: 0 5px 15px rgba(0, 136, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.3);
             transition: 0.3s;
         }
         
         .telegram-btn:hover { 
             transform: scale(1.02); 
-            box-shadow: 0 8px 25px rgba(0, 136, 255, 0.5); 
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.5); 
         }
     </style>
 </head>
 <body>
 
-    <!-- فيديو الخلفية المتحرك الموجه للملف المحلي 000.mp4 -->
+    <!-- فيديو الخلفية المتحرك فائق الوضوح -->
     <video class="video-background" autoplay loop muted playsinline>
         <source src="000.mp4" type="video/mp4">
     </video>
     
-    <!-- طبقة التعتيم المحمية -->
+    <!-- طبقة التعتيم الخفيفة المحمية -->
     <div class="overlay"></div>
 
     <div class="profile-container">
@@ -161,7 +161,7 @@
         </div>
         
         <div class="avatar-wrapper">
-            <img src="1000522173_2.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Mohamed+Ashraf&background=0088ff&color=fff&size=256'" class="avatar">
+            <img src="1000522173_2.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Mohamed+Ashraf&background=a855f7&color=fff&size=256'" class="avatar">
         </div>
 
         <div class="name">محمد أشرف</div>
@@ -186,7 +186,7 @@
         <div class="info-grid">
             <div class="info-card"><label>الأنمي المفضل</label><span>🔍 المحقق كونان</span></div>
             <div class="info-card"><label>الشخصية المفضلة</label><span>🔥 سون غوكو</span></div>
-            <div class="info-card"><label>الألوان المفضلة</label><span>⚫🔵 الأسود والأزرق</span></div>
+            <div class="info-card"><label>الألوان المفضلة</label><span>⚫💜 الأسود والبنفسجي</span></div>
             <div class="info-card"><label>الأكلة المفضلة</label><span>🍽️ أي شيء مش غريب</span></div>
             <div class="info-card" style="grid-column: span 2;"><label>القصة المفضلة</label><span>⚔️ هجوم العمالقة</span></div>
         </div>
